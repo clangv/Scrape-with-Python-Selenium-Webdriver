@@ -40,8 +40,19 @@ for proj in projects:
         proj_url = link[0].get_attribute('href')  # Get href
         project_list[proj_name] = proj_url
         print(f"Project Name: {proj_name}, URL: {proj_url}")
+
 # extracting data
+# Convert dictionary to DataFrame
 project_df = pd.DataFrame.from_dict(project_list, orient='index')
-project_df.to_csv("github_ml_projects.csv", index=False)
+
+# Reset index so project name becomes a column
+project_df.reset_index(inplace=True)
+
+# Rename columns
+project_df.columns = ['Project Name', 'URL']
+
+# Save to CSV
+project_df.to_csv("github_ml_projectswname.csv", index=False)
+print("CSV saved with project names and URLs.")
 # Close the browser
 # browser.quit()
