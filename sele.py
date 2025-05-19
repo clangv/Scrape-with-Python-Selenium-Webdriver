@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+import pandas as pd
 
 # Set path to chromedriver.exe
 chromedriver_path = 'F:\\chromedriver-win64\\chromedriver.exe'
@@ -39,5 +40,8 @@ for proj in projects:
         proj_url = link[0].get_attribute('href')  # Get href
         project_list[proj_name] = proj_url
         print(f"Project Name: {proj_name}, URL: {proj_url}")
+# extracting data
+project_df = pd.DataFrame.from_dict(project_list, orient='index')
+project_df.to_csv("github_ml_projects.csv", index=False)
 # Close the browser
 # browser.quit()
